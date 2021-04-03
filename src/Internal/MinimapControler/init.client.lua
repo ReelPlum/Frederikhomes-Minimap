@@ -19,6 +19,10 @@ local plr = Players.LocalPlayer
 	MinimapCamera.FieldOfView = 70
 	MinimapCamera.Parent = workspace	
 	
+  local UpdatedEvent = Instance.new("BindableEvent")
+  UpdatedEvent.Name = "Update"
+  UpdatedEvent.Parent = script.Parent:WaitForChild("Events")
+
 	local cam = game.Workspace.CurrentCamera
 
 	local uiCreationController = require(script:WaitForChild("UiCreationController"))
