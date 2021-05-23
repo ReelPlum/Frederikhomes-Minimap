@@ -24,7 +24,9 @@ local function pointToViewport(camera, p, vps) --This is written EgoMoose :D
 end;
 
 function blipController:getUIPosition(objPosition)
-	local vps = Vector2.new(Settings["Gui"]["mapSize"].X.Offset, Settings["Gui"]["mapSize"].Y.Offset)
+	local vpsC = game.Workspace.CurrentCamera.ViewportSize
+	
+	local vps = Vector2.new(Settings["Gui"]["mapSize"].X.Offset + (Settings["Gui"]["mapSize"].X.Scale*vpsC.X), (Settings["Gui"]["mapSize"].X.Offset + (Settings["Gui"]["mapSize"].X.Scale*vpsC.X)) / Settings["Ratio"])
 	
 	return pointToViewport(game.Workspace.MinimapCamera, objPosition, vps)
 end

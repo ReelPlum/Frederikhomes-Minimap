@@ -15,8 +15,14 @@ end
 function mainMinimap:render()
 	
 	
+	local vps = game.Workspace.CurrentCamera.ViewportSize
 	local mapsize = Settings["Gui"]["mapSize"]
-	Settings["Y"] = (mapsize.Y.Offset / (math.tan(math.rad(35)) * 2)) + (mapsize.X.Offset / 2)
+	local y = (mapsize.Y.Offset + (mapsize.Y.Scale*vps.Y) / (math.tan(math.rad(35)) * 2)) + (mapsize.X.Offset + (mapsize.X.Scale*vps.X) / 2)
+	Settings["Y"] = y
+	
+	Settings["Ratio"] = (mapsize.X.Offset + (mapsize.X.Scale*vps.X)) / (mapsize.Y.Offset + (mapsize.Y.Scale*vps.Y))
+	
+	local vps = game.Workspace.CurrentCamera.ViewportSize
 	
 	return Roact.createElement("ScreenGui", {
 		Name = "Minimap";
@@ -27,13 +33,18 @@ function mainMinimap:render()
 		Background = Roact.createElement("Frame", { --This is the border.
 			Name = "MinimapBorder";
 
-			Size = Settings["Gui"]["mapSize"] + UDim2.new(0, Settings["Gui"]["borderSize"]*2, 0, Settings["Gui"]["borderSize"]*2);
+			Size = mapsize + UDim2.new(0, Settings["Gui"]["borderSize"]*2, 0, Settings["Gui"]["borderSize"]*2);
 			AnchorPoint = Settings["Gui"]["anchorPoint"];
 			Position = Settings["Gui"]["mapPosition"];
 			BackgroundColor3 = Settings["Gui"]["borderColor"];
 			BackgroundTransparency = Settings["Gui"]["borderTransparency"];
 			BorderSizePixel = 0;
 		},{
+			Roact.createElement("UIAspectRatioConstraint", {
+				DominantAxis = Enum.DominantAxis.Width;
+				AspectType = Enum.AspectType.FitWithinMaxSize;
+				AspectRatio = Settings["Ratio"];
+			});
 			Roact.createElement(PlayerComponent);
 			Roact.createElement("UICorner", {
 				CornerRadius = Settings["Gui"]["borderCornerRoundness"]
@@ -42,7 +53,7 @@ function mainMinimap:render()
 			Map = Roact.createElement("ViewportFrame", { --This is the map gui.
 				Name = "Map";
 
-				Size = Settings["Gui"]["mapSize"];
+				Size = UDim2.new(1, -Settings["Gui"]["borderSize"]*2, 1, -Settings["Gui"]["borderSize"]*2);
 				AnchorPoint = Vector2.new(.5,.5);
 				Position = UDim2.new(.5,0,.5,0);
 				BackgroundColor3 = Settings["Gui"]["mapColor"];

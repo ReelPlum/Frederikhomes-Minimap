@@ -28,13 +28,12 @@ local function createBlips()
 end
 
 function blipContainer:init()
-	
 end
 
 function blipContainer:render()
 	return Roact.createElement("Frame", { --This is the blip container.
 		Name = "Blip Container";
-
+		
 		Size = UDim2.new(1,0,1,0);
 		Position = UDim2.new(.5,0,.5,0);
 		AnchorPoint = Vector2.new(.5,.5);
