@@ -9,7 +9,6 @@ SETTINGS ARE A CHILD OF THIS SCRIPT. IT'S CONVENIENTLY NAMED "SETTINGS".
 
 
 
-
 local Minimap = {}
 
 local Settings = require(script:WaitForChild("Settings"))
