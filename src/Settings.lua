@@ -95,7 +95,8 @@ local Settings =
 			["maxBlipDistance"] = 1000; --This is how far away the blips can be from the character before disappearing from the map (In studs). Default is 500.
 			["rotation"] = true; --This controlls of the map is rotating with the camera. Set it to false to make it stop rotating with the camera.
 			["Visible"] = true; --This is for when you want to have your minimap hidden when the player initially joins. You will have to toggle the minimap with scripts if this is set to false.
-			["mapRotation"] = -180; --The amount of degrees the map has to be rotated for it to be correct.
+			["mapRotation"] = -180; --The amount of degrees the map has to be rotated for it to be correct. 
+			["showTeamMembers"] = true; --Shows the teammembers on the map. Automaticly gets the members of the team the player is on.
 		};
 	}
 
