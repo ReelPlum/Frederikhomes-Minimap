@@ -29,7 +29,7 @@ function blip:render()
 	local TagInfo = TagController:findTag(self.props.TagName)
 	
 	return Roact.createElement("ImageButton", {
-		BackgroundTransparency = Settings["Gui"]["blipTransparency"];
+		BackgroundTransparency = TagInfo.transparency or Settings["Gui"]["blipTransparency"];
 		BorderSizePixel = Settings["Gui"]["blipBorderSizePixel"];
 		BackgroundColor3 = Settings["Gui"]["blipColor"];
 		BorderColor3 = Settings["Gui"]["blipBorderColor"];
@@ -47,11 +47,15 @@ function blip:render()
 		
 		[Roact.Event.MouseEnter] = function(rbx)
 			--Show tooltip
+			if not TagInfo.toolTip or TagInfo.toolTip == "" then return end
+
 			self.toolTip = Roact.mount(Roact.createElement(ToolTip, {Text = TagInfo.toolTip; Blip = rbx;}), plr:WaitForChild("PlayerGui"))
 			
 		end;
 		[Roact.Event.MouseLeave] = function(rbx)
 			--Hide tooltip
+			if not self.toolTip then return end
+
 			Roact.unmount(self.toolTip)
 		end;
 	})

@@ -54,11 +54,11 @@ end)
 if Settings["Technical"]["showTeamMembers"] == true or not Settings["Technical"]["showTeamMembers"] then
   table.insert(Settings["Tags"], {
     tagName = "Player";
-    toolTip = "Player :O";
     iconID = 5483943698;
     color = Color3.fromRGB(12, 15, 189);
     size = UDim2.new(0, 15, 0, 15);
     snapToBorder = false;
     rotate = true;
+    transparency = 1;
   })
 end
