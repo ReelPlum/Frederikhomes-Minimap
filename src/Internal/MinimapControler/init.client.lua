@@ -9,7 +9,7 @@ local plr = Players.LocalPlayer
 	if Settings["Map"]["size"].Y > 1024 or Settings["Map"]["size"].X > 1024 then
 		Settings["Divide"] = Settings["Map"]["size"].Y > 1024 and (Settings["Map"]["size"].Y/1024) or Settings["Map"]["size"].X > 1024 and (Settings["Map"]["size"].X/1024)
 	end
-
+	
 	local Roact = require(script.Parent:WaitForChild("Roact"))
 
 	script.Parent:WaitForChild("Roact").Parent = game:GetService("ReplicatedStorage")
@@ -19,6 +19,10 @@ local plr = Players.LocalPlayer
 	MinimapCamera.FieldOfView = 70
 	MinimapCamera.Parent = workspace	
 	
+  local UpdatedEvent = Instance.new("BindableEvent")
+  UpdatedEvent.Name = "Update"
+  UpdatedEvent.Parent = script.Parent:WaitForChild("Events")
+
 	local cam = game.Workspace.CurrentCamera
 
 	local uiCreationController = require(script:WaitForChild("UiCreationController"))
@@ -26,10 +30,9 @@ local plr = Players.LocalPlayer
 	local ui = uiCreationController:Init()
 
 	local Handle = Roact.mount(ui,plr:WaitForChild("PlayerGui"))
-
-	local vps = Vector2.new(1920, 1080)
+	
 	local mapsize = Settings["Gui"]["mapSize"]
-	Settings["Y"] = (mapsize.Y.Offset + (mapsize.Y.Scale*vps.Y) / (math.tan(math.rad(35)) * 2)) + (mapsize.X.Offset + (mapsize.X.Scale*vps.X) / 2)
+	Settings["Y"] = (mapsize.Y.Offset / (math.tan(math.rad(35)) * 2)) + (mapsize.X.Offset / 2)
 	
 	game:GetService("RunService").RenderStepped:connect(function()
 		local char = plr.Character or plr.CharacterAdded:wait()
@@ -39,11 +42,7 @@ local plr = Players.LocalPlayer
 			
 			local ROOTPART_POS = rootpart.CFrame.p
 			
-			local vps = Vector2.new(1920, 1080)
-			local mapsize = Settings["Gui"]["mapSize"]
-			local y = (mapsize.Y.Offset + (mapsize.Y.Scale*vps.Y) / (math.tan(math.rad(35)) * 2)) + (((Settings["Gui"]["mapSize"].X.Offset + (Settings["Gui"]["mapSize"].X.Scale*vps.X)) / Settings["Ratio"]) / 2)
-			Settings["Y"] = y
-		
+			local y = Settings["Y"]
 			local onepixel = Settings["Technical"]["onePixel"]
 			local divide = Settings["Divide"]
 			

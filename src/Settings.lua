@@ -12,8 +12,8 @@ local Settings =
 				iconID = 5254553771;
 				color = Color3.fromRGB(255,255,255);
 				size = UDim2.new(0, 20, 0, 20);
-				snapToBorder = true;
-				rotate = false;
+				snapToBorder = false;
+				rotate = true;
 			};
 
 			{
@@ -51,11 +51,11 @@ local Settings =
 		};
 		
 		["Gui"] = { --This is all the settings for the Guis. (This is more advanced! Please don't touch if you're not experienced!)
-			["mapSize"] = UDim2.new(0,250,0,150); --This is the size of the map.
+			["mapSize"] = UDim2.fromOffset(250,150); --This is the size of the map.
 			["borderSize"] = 3; --This is the size of the border surrounding the map.
 			["anchorPoint"] = Vector2.new(1,1); --This is the anchorpoint for the map gui.
 			["mapPosition"] = UDim2.new(1,-5,1,-5); --This is the position of the map. "anchorPoint" will have an effect on the position.
-
+			
 			--This is the colors of the things
 			["mapColor"] = Color3.fromRGB(103, 161, 255); --This is the color, if some parts of the map are transparent / you're at the edge of the map.
 			["borderColor"] = Color3.fromRGB(51,51,51); --The color of the border sorrounding the map.
@@ -91,7 +91,7 @@ local Settings =
 		};
 		
 		["Technical"] = { --This is some technical settings.
-			["onePixel"] = .75; --This is what one pixel is in studs.
+			["onePixel"] = 1; --This is what one pixel is in studs.
 			["maxBlipDistance"] = 1000; --This is how far away the blips can be from the character before disappearing from the map (In studs). Default is 500.
 			["rotation"] = true; --This controlls of the map is rotating with the camera. Set it to false to make it stop rotating with the camera.
 			["Visible"] = true; --This is for when you want to have your minimap hidden when the player initially joins. You will have to toggle the minimap with scripts if this is set to false.
